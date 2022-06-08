@@ -13,53 +13,9 @@ let courses = [
 // Варианты цен (фильтры), которые ищет пользователь
 let requiredRange1 = [null, 200];
 let requiredRange2 = [100, 350];
-let requiredRange3 = [40, 400];
+let requiredRange3 = [200, null];
 
-const filterByPriceRange = ([rangeMin, rangeMax], items) => {
-
-    if (rangeMin == null && rangeMax == null)
-        return items
-    
-    return items.filter(i => {
-        let [priceMin, priceMax] = i.prices
-
-        if (priceMin == null && priceMax == null)
-            return true
-        
-        if (rangeMin == null) {
-            if (priceMin == null)
-                return true      
-
-            if (priceMin <= rangeMax)
-                return true
-        }
-        
-        if (rangeMax == null) {
-            if (priceMax == null)
-                return true
-            
-            if (priceMax >= rangeMin)
-                return true
-        }
-
-        if (priceMin == null && priceMax >= rangeMin)
-            return true
-        
-        if (priceMax == null && priceMin <= rangeMax)
-            return true
-
-        if (priceMin >= rangeMin && priceMin <= rangeMax || priceMax <= rangeMax && priceMax >= rangeMin || priceMin < rangeMin && priceMax > rangeMax)
-            return true
-
-        return false
-
-        
-        
-    })
-}
-
-
-const filterByPriceRange2 = (requiredRange, items) => {
+const filterByPriceRange = (requiredRange, items) => {
     let [rangeMin, rangeMax] = requiredRange
     
     if (rangeMin == null && rangeMax == null)
@@ -106,5 +62,4 @@ const filterByPriceRange2 = (requiredRange, items) => {
     })
 }
 
-console.log("Start")
-console.log(filterByPriceRange2(requiredRange3, courses))
+console.log(filterByPriceRange(requiredRange3, courses))
