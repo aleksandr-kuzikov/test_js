@@ -1,0 +1,110 @@
+// Список курсов
+let courses = [
+    { name: "Courses in England", prices: [0, 100] }, 
+    { name: "Courses in Germany", prices: [500, null] }, 
+    { name: "Courses in Italy", prices: [100, 200] }, 
+    { name: "Courses in Russia", prices: [null, 400] },
+    { name: "Courses in China", prices: [50, 250] },
+    { name: "Courses in USA", prices: [200, null] },
+    { name: "Courses in Kazakhstan", prices: [56, 324] },
+    { name: "Courses in France", prices: [null, null] },
+];
+
+// Варианты цен (фильтры), которые ищет пользователь
+let requiredRange1 = [null, 200];
+let requiredRange2 = [100, 350];
+let requiredRange3 = [40, 400];
+
+const filterByPriceRange = ([rangeMin, rangeMax], items) => {
+
+    if (rangeMin == null && rangeMax == null)
+        return items
+    
+    return items.filter(i => {
+        let [priceMin, priceMax] = i.prices
+
+        if (priceMin == null && priceMax == null)
+            return true
+        
+        if (rangeMin == null) {
+            if (priceMin == null)
+                return true      
+
+            if (priceMin <= rangeMax)
+                return true
+        }
+        
+        if (rangeMax == null) {
+            if (priceMax == null)
+                return true
+            
+            if (priceMax >= rangeMin)
+                return true
+        }
+
+        if (priceMin == null && priceMax >= rangeMin)
+            return true
+        
+        if (priceMax == null && priceMin <= rangeMax)
+            return true
+
+        if (priceMin >= rangeMin && priceMin <= rangeMax || priceMax <= rangeMax && priceMax >= rangeMin || priceMin < rangeMin && priceMax > rangeMax)
+            return true
+
+        return false
+
+        
+        
+    })
+}
+
+
+const filterByPriceRange2 = (requiredRange, items) => {
+    let [rangeMin, rangeMax] = requiredRange
+    
+    if (rangeMin == null && rangeMax == null)
+        return items
+    
+    if (rangeMin == null) {
+        return items.filter(i => {
+            let [priceMin, priceMax] = i.prices
+            
+            if (priceMin == null || priceMin <= rangeMax)
+                return true
+
+            return false
+        })
+    }
+    
+    if (rangeMax == null) {
+        return items.filter(i => {
+            let [priceMin, priceMax] = i.prices
+            
+            if (priceMax == null || priceMax >= rangeMin)
+                return true
+
+            return false
+        })
+    }
+
+    return items.filter(i => {
+        let [priceMin, priceMax] = i.prices
+
+        if (priceMin == null && priceMax == null)
+            return true
+
+        if (priceMin == null && priceMax >= rangeMin)
+            return true
+        
+        if (priceMax == null && priceMin <= rangeMax)
+            return true
+
+        if (priceMin >= rangeMin && priceMin <= rangeMax || priceMax <= rangeMax && priceMax >= rangeMin || priceMin < rangeMin && priceMax > rangeMax)
+            return true
+
+        return false
+    })
+}
+
+console.log("Start")
+console.log(filterByPriceRange2(requiredRange3, courses))

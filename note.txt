@@ -1,0 +1,41 @@
+// vars
+minPrice, maxPrice, minRange maxRange
+
+// rules vars != null
+minPrice >= minRange && minPrice <= maxRange 
+maxPrice <= maxRange && maxPrice >= minRange 
+
+// rules minPrice = null 
+maxPrice <= maxRange && maxPrice >= minRange 
+
+// rules maxPrice = null
+minPrice >= minRange && minPrice <= maxRange 
+
+// rules minRange = null
+minPrice <= maxRange
+
+// rules maxRange = null
+maxPrice >= minRange
+
+// rules minPrice & maxPrice = null
+!
+
+// rules minRange & maxRange = null
+!
+
+// rules minPrice & minRange = null
+//maxPrice > 0
+!
+
+// rules minPrice & maxRange = null
+maxPrice >= minRange 
+
+
+// rules maxPrice & minRange = null
+minPrice <= maxRange 
+
+// rules maxPrice & maxRange = null
+! 
+
+
+
